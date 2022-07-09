@@ -1,0 +1,31 @@
+[BASIC]
+good-names=logger,ex,Base,id
+disable=W0703,C0116,E1120,E0611,W0611,C0114,C0115
+
+[MASTER]
+init-hook="from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
+
+[DESIGN]
+max-locals=20
+max-public-methods=25
+
+[MISCELLANEOUS]
+max-line-length=150
+ignore=tests,gen
+
+[TYPECHECK]
+generated-members=batch, CODE, MESSAGE
+
+[SIMILARITIES]
+
+# Minimum lines number of a similarity.
+min-similarity-lines=25
+
+# Ignore comments when computing similarities.
+ignore-comments=no
+
+# Ignore docstrings when computing similarities.
+ignore-docstrings=yes
+
+# Ignore imports when computing similarities.
+ignore-imports=yes
