@@ -14,9 +14,8 @@ logging.basicConfig(format=FORMAT, level=logging.INFO)
 class PotatoService():
     def __init__(self):
         options = Options()
-        options.add_extension("/Users/victor_wu/Library/Application Support/Google/Chrome/Default/Extensions/cjpalhdlnbpafiamejdnhcphjbkeiagm/1.43.0_0.crx")
+        options.add_extension("./extension/1.43.0_0.crx")
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), chrome_options=options)
-        # self.driver.minimize_window()
         self.driver.get('chrome://settings/')
         self.driver.execute_script("chrome.settingsPrivate.setDefaultZoom(0.5);")
 
