@@ -12,7 +12,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     user_name = args.user
-    user_post_page_url = ("%s/user/%s/posts", config.POTATO_HOST, users.info[user_name]['uuid'])
+    user_post_page_url = f"{config.POTATO_HOST}/user/{users.info[user_name]['uuid']}/posts"
 
     PotatoService = PotatoService()
     PotatoService.login(users.info[user_name], config.LOGIN_URL)

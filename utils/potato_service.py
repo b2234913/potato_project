@@ -34,31 +34,34 @@ class PotatoService():
     def login(self, user_info, login_url):
         for try_time in range(10):
             try:
-                logging.info("Try %s: ID login.", try_time)
+                logging.info("Try %s: Account login.", try_time)
                 self.redirect_retry(login_url)
                 logging.info("Go to %s.", self.driver.current_url)
-                x_path = ("//select[@class='forms-addon-text-select__Select--r6FsZ parts-shared__PhoneCountryAddon--oV3ov']//option[@value='%s']",
-                            user_info["code"])
+                #pylint: disable = line-too-long
+                x_path = "//select[@class='forms-addon-text-select__Select--r6FsZ parts-shared__PhoneCountryAddon--oV3ov']//option[@value='"+ user_info["code"] +"']"
                 self.driver.find_element(By.XPATH, x_path).click()
                 self.driver.find_element(By.CLASS_NAME, "forms-form__FormInputInput--4ZfCG").send_keys(user_info["id"])
                 self.driver.find_element(By.CLASS_NAME, "elements-text-button__TextButton--theme-filled--kI1ER").click()
-                logging.info("Login ID.")
-            except Exception as exc:
-                logging.error(exc)
-                continue
-            break
-        time.sleep(1)
-        for try_time in range(10):
-            try:
-                logging.info("Try %s: PW login.", try_time)
+                logging.info("Logined ID.")
+                time.sleep(1)
                 self.driver.find_element(By.CLASS_NAME, "forms-form__FormInputInput--4ZfCG").send_keys(user_info["pw"])
                 self.driver.find_element(By.CLASS_NAME, "elements-text-button__TextButton--theme-filled--kI1ER").click()
-                logging.info("Login PW.")
+                logging.info("Logined PW.")
+                time.sleep(5)
+                self.check_score()
             except Exception as exc:
                 logging.error(exc)
                 continue
             break
-        time.sleep(2)
+
+    def check_score(self):
+        score_block = self.driver.find_element(By.XPATH, "//a[@href='/i/score']").find_elements(By.XPATH, "//h4")
+        level = score_block[1].text
+        today_score = score_block[2].text
+        total_score = score_block[3].text
+        logging.info("Level is %s.", level)
+        logging.info("Today score is %s.", today_score)
+        logging.info("Total score is %s.", total_score)
 
     def create_new_draft(self, user_post_page_url: str) -> None:
         for try_time in range(3):
@@ -72,7 +75,8 @@ class PotatoService():
                 self.driver.find_elements(By.XPATH, x_path)[1].click()
                 self.driver.find_element(By.XPATH, "//a[text()='文章']").click()
                 pop_up_window = self.driver.find_element(By.XPATH, "//div[@class='mixed-legal-terms-prompt-lightbox__ScrollableMiniCard--sz3e2']")
-                for i in range(10):
+                for scole_time in range(10):
+                    logging.debug("Scole down time %s", scole_time)
                     self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', pop_up_window)
                     time.sleep(1)
                 self.driver.find_element(By.XPATH, "//span[text()='我同意']").click()

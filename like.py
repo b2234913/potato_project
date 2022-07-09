@@ -13,5 +13,5 @@ if __name__ == "__main__":
 
     PotatoService = PotatoService()
     PotatoService.login(users.info[user_name], config.LOGIN_URL)
-    uuid_list = PotatoService.get_latest_post_uuid_list(config.LATEST_POST_URL, 2)
-    PotatoService.like_post(uuid_list, False)
+    # uuid_list = PotatoService.get_latest_post_uuid_list(config.LATEST_POST_URL, 2)
+    # PotatoService.like_post(uuid_list, False)
