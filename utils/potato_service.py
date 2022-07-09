@@ -75,10 +75,10 @@ class PotatoService():
                 self.driver.find_elements(By.XPATH, x_path)[1].click()
                 self.driver.find_element(By.XPATH, "//a[text()='文章']").click()
                 pop_up_window = self.driver.find_element(By.XPATH, "//div[@class='mixed-legal-terms-prompt-lightbox__ScrollableMiniCard--sz3e2']")
-                for scole_time in range(5):
+                for scole_time in range(10):
                     logging.debug("Scole down time %s", scole_time)
                     self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', pop_up_window)
-                    time.sleep(1)
+                    time.sleep(0.2)
                 self.driver.find_element(By.XPATH, "//span[text()='我同意']").click()
                 time.sleep(1)
                 logging.info("Clicking new draft.")
