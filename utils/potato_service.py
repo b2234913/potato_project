@@ -24,8 +24,9 @@ class PotatoService():
         for i in range(10):
             try:
                 self.driver.get(url)
-                logging.info(f"Go to {self.driver.current_url}.")
-            except Exception as e:
+                logging.info("Go to %s.", self.driver.current_url)
+            except Exception as e :
+                logging.error("try %s and get something error", i)
                 logging.error(e)
                 continue
             break
@@ -34,11 +35,11 @@ class PotatoService():
         for i in range(10):
             try:
                 self.redirect_retry(login_url)
-                logging.info(f"Go to {self.driver.current_url}.")
+                logging.info("Go to %s.", self.driver.current_url)
                 self.driver.find_element(By.XPATH, "//select[@class='forms-addon-text-select__Select--r6FsZ parts-shared__PhoneCountryAddon--oV3ov']//option[@value='" + user_info["code"] + "']").click()
                 self.driver.find_element(By.CLASS_NAME, "forms-form__FormInputInput--4ZfCG").send_keys(user_info["id"])
                 self.driver.find_element(By.CLASS_NAME, "elements-text-button__TextButton--theme-filled--kI1ER").click()
-                logging.info(f"Login ID.")
+                logging.info("Login ID.")
             except Exception as e:
                 logging.error(e)
                 continue
@@ -48,7 +49,7 @@ class PotatoService():
             try:
                 self.driver.find_element(By.CLASS_NAME, "forms-form__FormInputInput--4ZfCG").send_keys(user_info["pw"])
                 self.driver.find_element(By.CLASS_NAME, "elements-text-button__TextButton--theme-filled--kI1ER").click()
-                logging.info(f"Login PW.")
+                logging.info("Login PW.")
             except Exception as e:
                 logging.error(e)
                 continue
@@ -70,7 +71,7 @@ class PotatoService():
                     time.sleep(1)
                 self.driver.find_element(By.XPATH, "//span[text()='我同意']").click()
                 time.sleep(1)
-                logging.info(f"Clicking new draft.")
+                logging.info("Clicking new draft.")
             except Exception as e:
                 logging.error(e)
                 continue
@@ -116,7 +117,7 @@ class PotatoService():
                 logging.error(e)
                 continue
         return_post_uuid_list =  list(set(post_uuid_list))
-        logging.info(f"UUID list: {return_post_uuid_list}")
+        logging.info("UUID list: %s", return_post_uuid_list)
         return return_post_uuid_list
 
     def like_post(self, post_uuid_list, and_delete):
@@ -165,9 +166,9 @@ class PotatoService():
                         time.sleep(1)
                         self.driver.find_element(By.XPATH, "//div[@class='cards-card__CardItemContainer--2oLHT']").click()
                         time.sleep(2)
-                        logging.info(f"Deleted comment.")
+                        logging.info("Deleted comment.")
                     except Exception as e:
                         logging.error(e)
-                        logging.error(f"Delete error: {post_uuid}")
+                        logging.error("Delete error: {post_uuid}")
                         continue
                     break
