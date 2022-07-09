@@ -27,7 +27,7 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
         draft_uuid_list = PotatoService.get_latest_post_uuid_list(user_post_page_url, 3)
-        draft_uuid_list = list(set(draft_uuid_list) - set(config.EX_UUID))
+        draft_uuid_list = list(set(draft_uuid_list) - set(users.info[user_name]["ex_uuid"]))
         print(draft_uuid_list)
         if draft_uuid_list:
             PotatoService.like_post(draft_uuid_list, True)

@@ -10,11 +10,3 @@ DRAFT_INFO = {
     "title": "廢文",
     "contents": CONTEXTS
 }
-
-EX_UUID = [
-    "98a2ef8d-60fe-42e1-8c67-346f2219be19",
-    "ae0cd8fe-0955-43c4-85ac-c0b77828e54a",
-    "f146194f-1a7b-422a-9643-4538bf882d13",
-    "f6070868-d5ec-49e0-beb5-112a4894ec51",
-    "f1e60636-625a-4847-bae5-223789b51cd6",
-    "8e9fd6b9-4edb-44d5-b046-9ddda204a6f4"]
