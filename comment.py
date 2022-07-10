@@ -12,6 +12,6 @@ if __name__ == "__main__":
     user_name = args.user
 
 PotatoService = PotatoService()
-PotatoService.login(users.info['ShooterIsMe'], config.login_url)
-uuid_list = PotatoService.get_latest_post_uuid_list(config.latest_post_url, 30)
+PotatoService.login(users.info[user_name], config.LOGIN_URL)
+uuid_list = PotatoService.get_latest_post_uuid_list(config.LATEST_POST_URL, 15)
 PotatoService.comment_post(uuid_list, True)

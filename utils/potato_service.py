@@ -134,7 +134,7 @@ class PotatoService():
         return return_post_uuid_list
 
     def like_post(self, post_uuid_list: list, and_delete: bool) -> None:
-        for post_uuid in post_uuid_list:
+        for ind, post_uuid in enumerate(post_uuid_list):
             for i in range(10):
                 try:
                     self.redirect_retry(f"https://www.potatomedia.co/post/{post_uuid}")
@@ -143,7 +143,7 @@ class PotatoService():
                     self.driver.execute_script(f"window.scrollTo(0, {action_bar.location['x']})")
                     action = action_bar.find_elements(By.CLASS_NAME, "elements-icon-button__Button--shape-3--q3Gpt")
                     action[0].click()
-                    logging.info("Liked post.")
+                    logging.info("Liked %s post.", ind)
                     if and_delete:
                         action[3].click()
                         self.driver.find_element(By.XPATH, "//span[text()='刪除貼文']").click()
@@ -158,7 +158,7 @@ class PotatoService():
                 break
 
     def comment_post(self, post_uuid_list: list, and_delete: bool) -> None:
-        for post_uuid in post_uuid_list:
+        for ind, post_uuid in enumerate(post_uuid_list):
             for i in range(10):
                 try:
                     self.redirect_retry(f"https://www.potatomedia.co/post/{post_uuid}")
@@ -167,7 +167,7 @@ class PotatoService():
                     time.sleep(1)
                     self.driver.find_element(By.XPATH, "//span[text()='留言']").click()
                     time.sleep(2)
-                    logging.info("Added new comment.")
+                    logging.info("Added %s comment.", ind)
                 except Exception as exc:
                     logging.error(exc)
                     continue
